@@ -1,0 +1,35 @@
+{
+  "name": "kinoteka-up01",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "db:setup": "prisma migrate deploy && prisma db seed",
+    "postinstall": "prisma generate"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.cjs"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.0",
+    "next": "15.5.29",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "prisma": "6.19.0",
+    "typescript": "5.9.3",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/node": "22.15.30",
+    "tailwindcss": "3.4.17",
+    "postcss": "8.5.6",
+    "autoprefixer": "10.4.21"
+  }
+}
