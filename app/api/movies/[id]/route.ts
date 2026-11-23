@@ -7,7 +7,10 @@ async function idOf(route: Route) {
   return /^\d+$/.test(id) && Number(id) <= 2147483647 ? Number(id) : 0;
 }
 export async function GET(_: Request, route: Route) {
-  const film = await db.movie.findUnique({where:{id:await idOf(route)},include:{reviews:true}});
+  const film = await db.movie.findUnique({
+    where: { id: await idOf(route) },
+    include: { reviews: true },
+  });
   return film ? Response.json(film) : missingMovie();
 }
 export async function PUT(req: Request, route: Route) {
@@ -15,12 +18,17 @@ export async function PUT(req: Request, route: Route) {
   if (denied) return denied;
   const data = movieInput(await req.json().catch(() => null));
   if (!data) return invalidMovie();
-  const updated = await db.movie.updateMany({where:{id:await idOf(route)},data});
-  return updated.count ? new Response(null,{status:204}) : missingMovie();
+  const updated = await db.movie.updateMany({
+    where: { id: await idOf(route) },
+    data,
+  });
+  return updated.count ? new Response(null, { status: 204 }) : missingMovie();
 }
 export async function DELETE(req: Request, route: Route) {
   const denied = await authorizeWrite(req);
   if (denied) return denied;
-  const deleted = await db.movie.deleteMany({where:{id:await idOf(route)}});
-  return deleted.count ? new Response(null,{status:204}) : missingMovie();
+  const deleted = await db.movie.deleteMany({
+    where: { id: await idOf(route) },
+  });
+  return deleted.count ? new Response(null, { status: 204 }) : missingMovie();
 }

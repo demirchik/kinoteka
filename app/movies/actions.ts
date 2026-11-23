@@ -16,7 +16,9 @@ export async function saveMovie(id: number | null, form: FormData) {
     redirect((id ? "/movies/" + id + "/edit" : "/movies/new") + "?error=1");
   }
   if (id) await localMovie(id);
-  const saved = id ? await db.movie.update({ where: { id }, data }) : await db.movie.create({ data });
+  const saved = id
+    ? await db.movie.update({ where: { id }, data })
+    : await db.movie.create({ data });
   redirect("/movies/" + saved.id);
 }
 export async function removeMovie(id: number) {
@@ -27,9 +29,21 @@ export async function removeMovie(id: number) {
 export async function saveReview(movieId: number, form: FormData) {
   const author = await requireViewer();
   await localMovie(movieId);
-  const body = field(form, "body"), rating = Number(field(form, "rating"));
-  if (!body || body.length > 2000 || !Number.isInteger(rating) || rating < 1 || rating > 10) redirect("/movies/" + movieId + "?error=1#review");
-  await db.review.upsert({ where: { movieId_author: { movieId, author } }, update: { body, rating }, create: { movieId, author, body, rating } });
+  const body = field(form, "body"),
+    rating = Number(field(form, "rating"));
+  if (
+    !body ||
+    body.length > 2000 ||
+    !Number.isInteger(rating) ||
+    rating < 1 ||
+    rating > 10
+  )
+    redirect("/movies/" + movieId + "?error=1#review");
+  await db.review.upsert({
+    where: { movieId_author: { movieId, author } },
+    update: { body, rating },
+    create: { movieId, author, body, rating },
+  });
   redirect("/movies/" + movieId + "#reviews");
 }
 export async function removeReview(movieId: number) {
@@ -44,6 +58,10 @@ export async function importMovie(tmdbId: number) {
   if (existing) redirect("/movies/" + existing.id);
   const data = await tmdbMovie(tmdbId);
   if (!data) redirect("/tmdb/" + tmdbId + "?error=1");
-  const saved = await db.movie.upsert({ where: { tmdbId }, update: {}, create: data });
+  const saved = await db.movie.upsert({
+    where: { tmdbId },
+    update: {},
+    create: data,
+  });
   redirect("/movies/" + saved.id);
 }
