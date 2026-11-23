@@ -23,7 +23,7 @@ git push -u origin develop
 ```powershell
 git switch develop
 git pull --ff-only origin develop
-git config --local user.name "Участник 1"
+git config --local user.name (Read-Host "Ваше имя для коммита")
 $email = Read-Host "Ваш подтверждённый email или noreply с GitHub"
 git config --local user.email $email
 ```
@@ -47,7 +47,7 @@ git push origin develop
 $repo = Read-Host "HTTPS-адрес общего репозитория"
 git clone --branch develop $repo kinoteka
 cd kinoteka
-git config --local user.name "Участник 2"
+git config --local user.name (Read-Host "Ваше имя для коммита")
 $email = Read-Host "Ваш подтверждённый email или noreply с GitHub"
 git config --local user.email $email
 npm ci
