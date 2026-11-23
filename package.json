@@ -11,7 +11,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "db:setup": "prisma migrate deploy && prisma db seed",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "predb:setup": "node prisma/ensure-db.cjs"
   },
   "prisma": {
     "seed": "node prisma/seed.cjs"
@@ -23,13 +24,13 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "prisma": "6.19.0",
-    "typescript": "5.9.3",
+    "@types/node": "22.15.30",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@types/node": "22.15.30",
-    "tailwindcss": "3.4.17",
+    "autoprefixer": "10.4.21",
     "postcss": "8.5.6",
-    "autoprefixer": "10.4.21"
+    "prisma": "6.19.0",
+    "tailwindcss": "3.4.17",
+    "typescript": "5.9.3"
   }
 }
