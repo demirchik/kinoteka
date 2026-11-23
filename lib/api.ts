@@ -1,7 +1,9 @@
 import { viewer } from "./auth";
 export async function authorizeWrite(req: Request) {
   const origin = req.headers.get("origin");
-  if (origin && origin !== new URL(req.url).origin)
+  const url = new URL(req.url);
+  const expected = url.protocol + "//" + (req.headers.get("host") ?? url.host);
+  if (origin && origin !== expected)
     return Response.json({ error: "Недопустимый источник" }, { status: 403 });
   if (!(await viewer()))
     return Response.json({ error: "Требуется вход" }, { status: 401 });
