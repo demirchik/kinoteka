@@ -39,8 +39,8 @@ export default async function Detail({ params, searchParams }: Route & Search) {
               <label>
                 Ваша оценка
                 <select name="rating" defaultValue={mine?.rating ?? 8}>
-                  {Array.from({ length: 10 }, (_, i) => (
-                    <option key={i}>{i + 1}</option>
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map((rating) => (
+                    <option key={rating}>{rating}</option>
                   ))}
                 </select>
               </label>
@@ -54,11 +54,11 @@ export default async function Detail({ params, searchParams }: Route & Search) {
                   defaultValue={mine?.body}
                 />
               </label>
-              <button className="primary">Сохранить отзыв</button>
+              <button type="submit" className="primary">Сохранить отзыв</button>
             </form>
             {mine && (
               <form action={removeReview.bind(null, id)}>
-                <button className="quiet">Удалить свой отзыв</button>
+                <button type="submit" className="quiet">Удалить свой отзыв</button>
               </form>
             )}
           </div>

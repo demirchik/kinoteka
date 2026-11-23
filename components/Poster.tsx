@@ -9,13 +9,14 @@ export default function Poster({
 }) {
   const [failed, setFailed] = useState("");
   return src && src !== failed ? (
+    // biome-ignore lint/performance/noImgElement: Offline posters and optional TMDB images load directly and fall back on error.
     <img
       src={src}
       alt={"Постер фильма «" + title + "»"}
       onError={() => setFailed(src)}
     />
   ) : (
-    <div className="placeholder" aria-label="Постер отсутствует">
+    <div role="img" className="placeholder" aria-label="Постер отсутствует">
       ◧
     </div>
   );

@@ -27,7 +27,7 @@ export default async function Login({ searchParams }: Search) {
             name="password"
           />
         </label>
-        <button className="primary">Войти</button>
+        <button type="submit" className="primary">Войти</button>
       </form>
       <details open>
         <summary>Учебные аккаунты</summary>

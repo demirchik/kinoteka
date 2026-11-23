@@ -1,5 +1,5 @@
-const { PrismaClient } = require("@prisma/client");
-const films = require("./demo.json");
+import { PrismaClient } from "@prisma/client";
+import films from "./demo.json" with { type: "json" };
 const db = new PrismaClient();
 const observations = [
   [
@@ -28,10 +28,10 @@ async function seed() {
         update: {},
         create: {
           id,
-          title,
-          year,
-          genre,
-          summary,
+          title: String(title),
+          year: Number(year),
+          genre: String(genre),
+          summary: String(summary),
           poster: "/posters/" + art + ".jpg",
         },
       });

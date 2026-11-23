@@ -25,7 +25,7 @@ export default async function Remote({ params }: Route) {
     <FilmDetail movie={movie}>
       {(await viewer()) ? (
         <form action={importMovie.bind(null, id)}>
-          <button className="primary">Сохранить в коллекцию</button>
+          <button type="submit" className="primary">Сохранить в коллекцию</button>
         </form>
       ) : (
         <Link className="pill" href="/login">

@@ -1,7 +1,7 @@
 export default function Loading() {
   return (
-    <p className="notice" role="status">
+    <output className="notice">
       Загружаем каталог…
-    </p>
+    </output>
   );
 }

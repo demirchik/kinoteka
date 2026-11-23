@@ -56,14 +56,14 @@ export default function MovieForm({
             defaultValue={movie?.summary}
           />
         </label>
-        <button className="primary">Сохранить фильм</button>
+        <button type="submit" className="primary">Сохранить фильм</button>
       </form>
       {movie && (
         <details>
           <summary>Удалить фильм</summary>
           <p>Фильм и все его отзывы будут удалены.</p>
           <form action={removeMovie.bind(null, movie.id)}>
-            <button className="danger">Подтвердить удаление</button>
+            <button type="submit" className="danger">Подтвердить удаление</button>
           </form>
         </details>
       )}

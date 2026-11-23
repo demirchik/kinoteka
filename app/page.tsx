@@ -54,7 +54,7 @@ export default async function Catalog({ searchParams }: Search) {
               maxLength={200}
               placeholder="Название фильма"
             />
-            <button>Найти</button>
+            <button type="submit">Найти</button>
           </form>
         </div>
         <nav className="tabs" aria-label="Источник фильмов">
@@ -72,9 +72,9 @@ export default async function Catalog({ searchParams }: Search) {
           </Link>
         </nav>
         {remote && !external && (
-          <p className="notice" role="status">
+          <output className="notice">
             TMDB недоступен. Показаны фильмы из локальной коллекции.
-          </p>
+          </output>
         )}
         <div className="gridfilms">
           {cards.map((m) => (

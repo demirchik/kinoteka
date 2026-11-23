@@ -12,10 +12,11 @@
     "typecheck": "tsc --noEmit",
     "db:setup": "prisma migrate deploy && prisma db seed",
     "postinstall": "prisma generate",
-    "predb:setup": "node prisma/ensure-db.cjs"
+    "predb:setup": "node prisma/ensure-db.cjs",
+    "lint": "biome lint --diagnostic-level=warn --error-on-warnings app components lib prisma/seed.ts"
   },
   "prisma": {
-    "seed": "node prisma/seed.cjs"
+    "seed": "node --experimental-strip-types prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "6.19.0",
@@ -24,6 +25,7 @@
     "react-dom": "19.2.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.8",
     "@types/node": "22.15.30",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",

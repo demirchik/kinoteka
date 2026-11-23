@@ -27,7 +27,7 @@ export default async function Layout({
               <>
                 <Link href="/movies/new">Добавить фильм</Link>
                 <form action={logout}>
-                  <button className="pill">Выйти · {author}</button>
+                  <button type="submit" className="pill">Выйти · {author}</button>
                 </form>
               </>
             ) : (
